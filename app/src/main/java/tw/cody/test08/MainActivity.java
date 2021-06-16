@@ -161,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
         test7(null);
     }
     public void test9(View view) {
-//        db.delete("user","id=2",)
         db.delete("user","id = ?",new String[] {"1"});
         test7(null);
     }

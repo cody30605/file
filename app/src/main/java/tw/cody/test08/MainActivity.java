@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        if (Context.ch(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},9487);
         } else {
@@ -53,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 9487) {
-//            if (grantResults>)
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 init();
             } else  {
@@ -70,14 +68,12 @@ public class MainActivity extends AppCompatActivity {
         sdroot = Environment.getExternalStorageDirectory();
         Log.v("cody",sdroot.getAbsolutePath());
 
-//        approot = new File(":\sdcard\android\data");
         approot = new File(sdroot,"Android/data/" + getPackageName());
         if (!approot.exists()) {
             approot.mkdirs();
         }
         Log.v("cody",approot.getAbsolutePath());
         sql = new Sql(this,"db",null,1);
-//        db = sql.getReadableDatabase();
         db = sql.getWritableDatabase();
     }
 
@@ -97,15 +93,12 @@ public class MainActivity extends AppCompatActivity {
     }
     public void test3(View view) {
         try {
-//            FileOutputStream stream = openFileOutput("coco.txt",MODE_PRIVATE);
             FileOutputStream stream = openFileOutput("coco.txt",MODE_APPEND);
-//            stream.write("5484/n".getBytes());
             stream.write("5484\n".getBytes());
             stream.flush();
             stream.close();
-//            Toast.makeText(this,"save ok",Toast.LENGTH_SHORT);
             Toast.makeText(this,"save ok",Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {     //Exception 跟 IOException差別
+        } catch (IOException e) {
             Log.v("cody",e.toString());
         }
 
@@ -116,10 +109,8 @@ public class MainActivity extends AppCompatActivity {
             StringBuffer sb = new StringBuffer();
             int i;
             while ((i = stream.read()) !=-1 ) {
-//                sb.append(i);
                 sb.append((char)i);
             }
-//        view1.setText(""+sb);
             view1.setText(sb.toString());
         Toast.makeText(this,"save ok",Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
@@ -179,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
         cv.put("username","co");
         cv.put("tel","02");
         cv.put("birthday","1979-01-11");
-//        db.update("user",cv,"id = ?",new String[] {"1"});  //被刪除的資料無法更新
         db.update("user",cv,"id = ?",new String[] {"2"});
         test7(null);
     }
